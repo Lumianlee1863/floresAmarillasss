@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unas flores amarillas para ti 🌻</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", Arial, sans-serif;
+        overflow: hidden;
+        background: linear-gradient(160deg, #fff9c4, #ffe082, #ffd54f);
+        color: #5d4300;
+    }
+
+    .petalos {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .petalo {
+        position: absolute;
+        top: -50px;
+        font-size: 24px;
+        animation: caer linear infinite;
+        opacity: .8;
+    }
+
+    @keyframes caer {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+        }
+    }
+
+    .contenedor {
+        position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 25px;
+    }
+
+    .tarjeta {
+        width: min(700px, 95vw);
+        padding: 45px 30px;
+        text-align: center;
+        border-radius: 30px;
+        background: rgba(255,255,255,.82);
+        box-shadow: 0 20px 60px rgba(117, 84, 0, .22);
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(255,193,7,.35);
+    }
+
+    .flor {
+        font-size: 105px;
+        line-height: 1;
+        display: inline-block;
+        cursor: pointer;
+        filter: drop-shadow(0 8px 8px rgba(120,80,0,.18));
+        animation: flotar 3s ease-in-out infinite;
+        transition: transform .3s;
+    }
+
+    .flor:hover { transform: scale(1.12) rotate(5deg); }
+
+    @keyframes flotar {
+        50% { transform: translateY(-10px) rotate(-3deg); }
+    }
+
+    h1 {
+        margin: 18px 0 8px;
+        font-size: clamp(2rem, 7vw, 4rem);
+        color: #d69500;
+    }
+
+    .subtitulo {
+        font-size: 1.15rem;
+        margin-bottom: 25px;
+        color: #755800;
+    }
+
+    .mensaje {
+        min-height: 90px;
+        margin: 20px auto;
+        max-width: 560px;
+        line-height: 1.7;
+        font-size: 1.08rem;
+    }
+
+    button {
+        border: none;
+        border-radius: 999px;
+        padding: 14px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+        background: #e9a900;
+        box-shadow: 0 8px 18px rgba(180,120,0,.25);
+        transition: .25s;
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+        background: #d99500;
+    }
+
+    #sorpresa {
+        display: none;
+        margin-top: 25px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        animation: aparecer .7s ease;
+    }
+
+    @keyframes aparecer {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .firma {
+        margin-top: 30px;
+        font-size: .9rem;
+        opacity: .65;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="petalos" id="petalos"></div>
+
+<div class="contenedor">
+    <main class="tarjeta">
+        <div class="flor" onclick="florClick()">🌻</div>
+
+        <h1>Flores amarillas para ti</h1>
+
+        <div class="subtitulo">
+            Porque hay días que merecen un pequeño detalle especial 💛
+        </div>
+
+        <p class="mensaje">
+            No hace falta una gran razón para regalar una flor.
+            A veces basta con querer recordarle a alguien que es importante,
+            que merece sonreír y que hay personas que se alegran de tenerla en su vida feliz dia, tqm.
+        </p>
+
+        <button onclick="mostrarSorpresa()">
+            Tengo algo más para ti 🌼
+        </button>
+
+        <div id="sorpresa">
+            Espero que hoy recibas muchas flores,
+            pero sobre todo muchos motivos para sonreír. 💛🌻
+            <br><br>
+            <strong>Feliz día de las flores amarillas.</strong>
+        </div>
+
+        <div class="firma">
+            Hecho con un poquito de código y mucho cariño ✨
+        </div>
+    </main>
+</div>
+
+<script>
+    const contenedor = document.getElementById("petalos");
+
+    for (let i = 0; i < 28; i++) {
+        const petalo = document.createElement("div");
+        petalo.className = "petalo";
+        petalo.textContent = Math.random() > .5 ? "🌼" : "🌻";
+        petalo.style.left = Math.random() * 100 + "vw";
+        petalo.style.animationDuration = (5 + Math.random() * 7) + "s";
+        petalo.style.animationDelay = (-Math.random() * 10) + "s";
+        petalo.style.fontSize = (14 + Math.random() * 18) + "px";
+        contenedor.appendChild(petalo);
+    }
+
+   let numeroMensaje = 0;
+
+const mensajes = [
+    "Espero que hoy recibas muchas flores, pero sobre todo muchos motivos para sonreír. 💛🌻",
+    "Una flor amarilla para recordarte lo especial que eres. 🌼",
+    "Que nunca te falten razones para sonreír, ni personas que quieran verte feliz. 💛",
+    "Hoy el amarillo representa un pequeño detalle, pero el cariño detrás de él es mucho más grande. 🌻",
+    "Si pudiera, te regalaría un campo entero de flores amarillas. 🌼✨",
+    "Que este día te recuerde que hay personas que se alegran simplemente de tenerte en su vida. 💛",
+    "Una flor para alegrarte el día y un mensaje para sacarte una sonrisa. 🌻",
+    "Ojalá este pequeño detalle haga que tu día sea un poquito más bonito. 🌼",
+    "No importa cuántas flores recibas hoy, espero que esta sea una de las que recuerdes. 💛",
+    "Que cada pétalo de esta flor lleve un poquito de felicidad hasta ti. 🌻✨",
+    "A veces los detalles pequeños son los que terminan significando más. 💛🌼",
+    "Y si llegaste hasta aquí... esta última flor es especialmente para ti. 🌻💛"
+];
+
+function mostrarSorpresa() {
+    document.getElementById("sorpresa").innerHTML = mensajes[numeroMensaje];
+
+    document.getElementById("sorpresa").style.display = "block";
+
+    numeroMensaje++;
+
+    if (numeroMensaje >= mensajes.length) {
+        numeroMensaje = 0;
+    }
+}
+</script>
+
+</body>
+</html>
